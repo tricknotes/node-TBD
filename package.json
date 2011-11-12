@@ -1,0 +1,17 @@
+{
+  "name": "node-TBD"
+, "description": "Node TDB"
+, "version": "0.0.1"
+, "author": "Ryunosuke SATO <tricknotes.rs@gmail.com>"
+, "main": "index"
+, "dependencies": {
+    "coffee-script": "~> 1.1.0"
+  }
+, "engines": {
+    "node": "~> 0.6.0"
+  }
+, "repository": {
+    "type": "git"
+  , "url": "git://github.com/tricknotes/node-TDB.git"
+  }
+}

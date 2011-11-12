@@ -1,0 +1,2 @@
+TDB = ->
+module.exports = TDB
