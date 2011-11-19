@@ -1,30 +1,32 @@
 net = require('net')
+repl = require('repl')
 
 class TBD
   constructor: (@sock, @argNames) ->
-    @code = ""
-    @result = null
-
-    self = this
     @sock ||= "#{TBD.sockPath}/node-TBD-#{Number(new Date())}.sock"
     @argNames ||= []
 
   process: =>
-    self = this
+    sock = @sock
     args = arguments
-    @server = net.createServer (socket) ->
-      socket.on 'data', (data) ->
-        self.code += data
+    names = @argNames
+    server = net.createServer (socket) ->
+      started = repl.start('node-TBD> ', socket)
 
-      socket.on 'end', ->
-        fn = eval("(function(#{self.argNames.join(',')}){return (#{self.code});})")
-        self.result = fn.apply(null, args)
+      for name, i in names
+        started.context[name] = args[i]
 
-    @server.listen(@sock)
+      started.context.__stream = socket
+
+      socket.on 'close', ->
+        server.close() if server.connections == 0
+
+    server.listen(@sock)
+    console.log("node-TBD listen on '#{sock}'")
 
 TBD.sockPath = '/tmp'
 
 module.exports = (sock) ->
-  (new TBD(sock)).process()
+  (new TBD(sock)).process
 
 module.exports.TBD = TBD
