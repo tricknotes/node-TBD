@@ -13,7 +13,7 @@ server.listen();
 ```
 
 ```js
-telnet localhost 3000
+telnet localhost 13000
 node-TBD> // input your code.
 ```
 

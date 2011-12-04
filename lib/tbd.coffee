@@ -2,8 +2,10 @@ net = require('net')
 repl = require('repl')
 
 class TBD
+  host: 'localhost'
+
   constructor: (@sock, @argNames) ->
-    @sock ||= "#{TBD.sockPath}/node-TBD-#{Number(new Date())}.sock"
+    @sock ||= 13000
     @argNames ||= []
 
   process: =>
@@ -21,8 +23,14 @@ class TBD
       socket.on 'close', ->
         server.close() if server.connections == 0
 
-    server.listen(@sock)
-    console.log("node-TBD listen on '#{sock}'")
+    lisetnedSocket = null
+    if typeof sock is 'number'
+      server.listen(@sock, @host)
+      lisetnedSocket = "#{@host}:#{sock}"
+    else
+      server.listen(@sock)
+      lisetnedSocket = sock
+    console.log("node-TBD listen on '#{lisetnedSocket}")
 
 TBD.sockPath = '/tmp'
 
