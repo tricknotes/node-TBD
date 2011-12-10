@@ -5,7 +5,7 @@ This library is the debugger for callback functions.
 ## Quick Example
 
 ```js
-var TBD = require('TBD');
+var TBD = require('node-TBD');
 var http = require('http');
 
 var server = http.createServer(TBD);
