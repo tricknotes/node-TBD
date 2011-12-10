@@ -20,7 +20,7 @@ node-TBD> // input your code.
 ## Install
 
 ```js
-npm install TBD
+npm install node-TBD
 ```
 
 ## Author
